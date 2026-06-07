@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jaarraa | Creative Technologist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+/* Light Mode Variables */
+--primary: #2563eb;
+--primary-dark: #1d4ed8;
+--secondary: #1e293b;
+--secondary-light: #334155;
+--accent: #f59e0b;
+--background: #ffffff;
+--surface: #f8fafc;
+--text: #0f172a;
+--text-secondary: #475569;
+--border: #e2e8f0;
+--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--glass-bg: rgba(255, 255, 255, 0.75);
+--glass-border: rgba(255, 255, 255, 0.18);
+--progress-bg: #cbd5e1;
+--scroll-bg: rgba(37, 99, 235, 0.2);
+
+/* Dark Mode Variables */
+--dark-primary: #3b82f6;
+--dark-primary-dark: #2563eb;
+--dark-secondary: #f1f5f9;
+--dark-secondary-light: #e2e8f0;
+--dark-accent: #fbbf24;
+--dark-background: #0f172a;
+--dark-surface: #1e293b;
+--dark-text: #f8fafc;
+--dark-text-secondary: #cbd5e1;
+--dark-border: #334155;
+--dark-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+--dark-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+--dark-glass-bg: rgba(30, 41, 59, 0.75);
+--dark-glass-border: rgba(255, 255, 255, 0.1);
+--dark-progress-bg: #475569;
+--dark-scroll-bg: rgba(59, 130, 246, 0.3);
+
+/* Shared Variables */
+--border-radius: 16px;
+--border-radius-lg: 24px;
+--transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+--transition-fast: all 0.2s ease;
+}
+
+.dark-mode {
+--primary: var(--dark-primary);
+--primary-dark: var(--dark-primary-dark);
+--secondary: var(--dark-secondary);
+--secondary-light: var(--dark-secondary-light);
+--accent: var(--dark-accent);
+--background: var(--dark-background);
+--surface: var(--dark-surface);
+--text: var(--dark-text);
+--text-secondary: var(--dark-text-secondary);
+--border: var(--dark-border);
+--shadow: var(--dark-shadow);
+--shadow-hover: var(--dark-shadow-hover);
+--glass-bg: var(--dark-glass-bg);
+--glass-border: var(--dark-glass-border);
+--progress-bg: var(--dark-progress-bg);
+--scroll-bg: var(--dark-scroll-bg);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html {
+scroll-behavior: smooth;
+font-size: 16px;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background: var(--background);
+color: var(--text);
+line-height: 1.6;
+overflow-x: hidden;
+transition: var(--transition);
+}
+
+/* Scroll Progress Bar */
+#scroll-progress {
+position: fixed;
+top: 0;
+left: 0;
+height: 4px;
+background: var(--scroll-bg);
+width: 0%;
+z-index: 10000;
+transition: width 0.2s ease;
+}
+
+/* Header Styles */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem 5%;
+z-index: 1000;
+background: transparent;
+transition: var(--transition);
+}
+
+header.scrolled {
+background: var(--surface);
+box-shadow: var(--shadow);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+
+.logo-svg {
+width: 40px;
+height: 40px;
+transition: var(--transition);
+}
+
+.logo-text {
+font-family: 'Poppins', sans-serif;
+font-weight: 700;
+font-size: 1.5rem;
+background: linear-gradient(45deg, var(--primary), var(--accent));
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+
+nav ul {
+display: flex;
+list-style: none;
+gap: 2.5rem;
+}
+
+nav a {
+text-decoration: none;
+color: var(--text);
+font-weight: 500;
+font-size: 1.05rem;
+position: relative;
+padding: 0.5rem 0;
+transition: var(--transition-fast);
+}
+
+nav a:hover, nav a.active {
+color: var(--primary);
+}
+
+nav a::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 2px;
+background: var(--primary);
+transition: var(--transition-fast);
+}
+
+nav a:hover::after, nav a.active::after {
+width: 100%;
+}
+
+#dark-mode-toggle {
+background: var(--surface);
+border: 1px solid var(--border);
+width: 48px;
+height: 48px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: var(--transition);
+box-shadow: var(--shadow);
+color: var(--text);
+}
+
+#dark-mode-toggle:hover {
+transform: rotate(30deg);
+box-shadow: var(--shadow-hover);
+}
+
+#dark-mode-toggle i {
+font-size: 1.25rem;
+transition: var(--transition-fast);
+}
+
+.fa-moon {
+display: none;
+}
+
+.dark-mode .fa-sun {
+display: none;
+}
+
+.dark-mode .fa-moon {
+display: inline-block;
+}
+
+/* Social Sidebar */
+.social-sidebar {
+position: fixed;
+left: 2rem;
+top: 50%;
+transform: translateY(-50%);
+display: flex;
+flex-direction: column;
+gap: 1.25rem;
+z-index: 999;
+}
+
+.social-sidebar a {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 48px;
+height: 48px;
+border-radius: 50%;
+background: var(--surface);
+color: var(--text);
+font-size: 1.25rem;
+text-decoration: none;
+transition: var(--transition);
+box-shadow: var(--shadow);
+border: 1px solid var(--border);
+}
+
+.social-sidebar a:hover {
+transform: translateY(-3px) scale(1.1);
+background: var(--primary);
+color: white;
+box-shadow: var(--shadow-hover);
+}
+
+/* Section Base Styles */
+section {
+padding: 6rem 10%;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+h2 {
+font-family: 'Poppins', sans-serif;
+font-size: 2.5rem;
+margin-bottom: 3.5rem;
+text-align: center;
+position: relative;
+display: inline-block;
+left: 50%;
+transform: translateX(-50%);
+}
+
+h2::after {
+content: '';
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+width: 70px;
+height: 4px;
+background: var(--primary);
+border-radius: 2px;
+}
+
+.section-title {
+font-family: 'Poppins', sans-serif;
+font-size: 2.25rem;
+margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+font-size: 1.25rem;
+color: var(--text-secondary);
+margin-bottom: 3rem;
+max-width: 700px;
+}
+
+/* Hero Section */
+#hero {
+min-height: 100vh;
+display: flex;
+align-items: center;
+position: relative;
+overflow: hidden;
+padding-top: 0;
+padding-bottom: 0;
+}
+
+.hero-content {
+max-width: 800px;
+z-index: 10;
+animation: fadeInUp 1s ease-out;
+}
+
+.hero-content h1 {
+font-family: 'Poppins', sans-serif;
+font-size: 4rem;
+line-height: 1.2;
+margin-bottom: 1.5rem;
+background: linear-gradient(45deg, var(--secondary), var(--primary));
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+
+.hero-content h1 span {
+color: var(--text);
+}
+
+#typed-text {
+font-family: 'Poppins', sans-serif;
+font-size: 3rem;
+font-weight: 700;
+color: var(--primary);
+margin: 1rem 0;
+min-height: 3.5rem;
+}
+
+.hero-content p {
+font-size: 1.35rem;
+color: var(--text-secondary);
+margin-bottom: 2.5rem;
+max-width: 650px;
+}
+
+.hero-buttons {
+display: flex;
+gap: 1.25rem;
+margin-top: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+display: inline-block;
+background: var(--primary);
+color: white;
+padding: 0.9rem 2.25rem;
+border-radius: 50px;
+text-decoration: none;
+font-weight: 600;
+font-size: 1.05rem;
+transition: var(--transition);
+border: 2px solid var(--primary);
+box-shadow: var(--shadow);
+position: relative;
+overflow: hidden;
+z-index: 1;
+}
+
+.btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 0;
+height: 100%;
+background: var(--primary-dark);
+z-index: -1;
+transition: var(--transition);
+}
+
+.btn:hover::before {
+width: 100%;
+}
+
+.btn:hover {
+transform: translateY(-3px);
+box-shadow: var(--shadow-hover);
+color: white;
+}
+
+.btn-secondary {
+background: transparent;
+color: var(--primary);
+}
+
+.btn-secondary::before {
+background: var(--primary);
+opacity: 0.15;
+}
+
+.btn-secondary:hover {
+color: white;
+}
+
+/* Hero Background Animation */
+.hero-bg {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+overflow: hidden;
+}
+
+.gradient-layer {
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+opacity: 0.15;
+animation: rotate 25s linear infinite;
+}
+
+.gradient-layer:nth-child(2) {
+background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+animation-duration: 35s;
+animation-direction: reverse;
+opacity: 0.1;
+top: 50%;
+left: 50%;
+}
+
+/* About Section */
+#about {
+background: var(--surface);
+position: relative;
+}
+
+.about-content {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 4rem;
+align-items: center;
+}
+
+.about-image {
+position: relative;
+border-radius: var(--border-radius-lg);
+overflow: hidden;
+box-shadow: var(--shadow-hover);
+transition: var(--transition);
+}
+
+.about-image:hover {
+transform: scale(1.03);
+}
+
+.about-image img {
+width: 100%;
+height: auto;
+display: block;
+transition: var(--transition);
+}
+
+.about-text p {
+margin-bottom: 1.5rem;
+font-size: 1.1rem;
+line-height: 1.8;
+}
+
+.mission {
+background: var(--surface);
+border-left: 4px solid var(--primary);
+padding: 1.5rem;
+margin: 2rem 0;
+border-radius: 0 var(--border-radius) var(--border-radius) 0;
+font-style: italic;
+position: relative;
+}
+
+.mission::before {
+content: '"';
+position: absolute;
+top: -20px;
+left: 10px;
+font-size: 5rem;
+color: var(--primary);
+opacity: 0.15;
+font-family: Georgia, serif;
+}
+
+.fun-facts {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin: 2rem 0;
+}
+
+.chip {
+background: var(--surface);
+border: 1px solid var(--border);
+padding: 0.4rem 1.1rem;
+border-radius: 50px;
+font-weight: 500;
+font-size: 0.95rem;
+transition: var(--transition-fast);
+}
+
+.chip:hover {
+background: var(--primary);
+color: white;
+transform: translateY(-2px);
+border-color: var(--primary);
+}
+
+/* Skills Section */
+.skills-categories {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2.5rem;
+margin-bottom: 4rem;
+}
+
+.category h3 {
+font-family: 'Poppins', sans-serif;
+font-size: 1.75rem;
+margin-bottom: 1.75rem;
+position: relative;
+padding-bottom: 0.75rem;
+}
+
+.category h3::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 40px;
+height: 3px;
+background: var(--accent);
+border-radius: 3px;
+}
+
+.skill-item {
+margin-bottom: 1.75rem;
+}
+
+.skill-info {
+display: flex;
+justify-content: space-between;
+margin-bottom: 0.5rem;
+font-weight: 500;
+}
+
+.skill-bar {
+height: 8px;
+background: var(--progress-bg);
+border-radius: 10px;
+overflow: hidden;
+}
+
+.skill-progress {
+height: 100%;
+background: var(--primary);
+border-radius: 10px;
+position: relative;
+transition: width 1.5s ease-out;
+}
+
+.tech-logos {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 2.5rem;
+margin-top: 2rem;
+}
+
+.logo-item {
+width: 80px;
+height: 80px;
+border-radius: 20px;
+background: var(--surface);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2.5rem;
+color: var(--primary);
+transition: var(--transition);
+position: relative;
+box-shadow: var(--shadow);
+border: 1px solid var(--border);
+}
+
+.logo-item:hover {
+transform: scale(1.25) rotate(5deg);
+box-shadow: var(--shadow-hover);
+z-index: 10;
+}
+
+.logo-item::after {
+content: attr(data-tooltip);
+position: absolute;
+bottom: -35px;
+left: 50%;
+transform: translateX(-50%);
+background: var(--secondary);
+color: white;
+padding: 0.35rem 0.85rem;
+border-radius: 8px;
+font-size: 0.85rem;
+white-space: nowrap;
+opacity: 0;
+transition: var(--transition-fast);
+font-weight: 500;
+}
+
+.logo-item:hover::after {
+opacity: 1;
+bottom: -40px;
+}
+
+/* Projects Section */
+.projects-filter {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 1rem;
+margin-bottom: 3rem;
+}
+
+.filter-btn {
+background: var(--surface);
+border: 2px solid var(--border);
+color: var(--text);
+padding: 0.65rem 1.75rem;
+border-radius: 50px;
+font-weight: 500;
+cursor: pointer;
+transition: var(--transition-fast);
+font-size: 1.05rem;
+}
+
+.filter-btn:hover, .filter-btn.active {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+}
+
+.projects-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 2.5rem;
+}
+
+.project-card {
+background: var(--surface);
+border-radius: var(--border-radius-lg);
+overflow: hidden;
+box-shadow: var(--shadow);
+transition: var(--transition);
+position: relative;
+}
+
+.project-card:hover {
+transform: translateY(-10px);
+box-shadow: var(--shadow-hover);
+}
+
+.project-card img {
+width: 100%;
+height: 220px;
+object-fit: cover;
+display: block;
+transition: var(--transition);
+}
+
+.project-card:hover img {
+transform: scale(1.05);
+}
+
+.project-content {
+padding: 1.75rem;
+}
+
+.project-content h3 {
+font-family: 'Poppins', sans-serif;
+font-size: 1.65rem;
+margin-bottom: 0.75rem;
+}
+
+.project-content p {
+color: var(--text-secondary);
+margin-bottom: 1.25rem;
+line-height: 1.7;
+}
+
+.project-tech {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem;
+margin-bottom: 1.5rem;
+}
+
+.project-tech span {
+background: var(--background);
+border: 1px solid var(--border);
+padding: 0.35rem 0.9rem;
+border-radius: 50px;
+font-size: 0.85rem;
+font-weight: 500;
+}
+
+.project-links {
+display: flex;
+gap: 1.25rem;
+}
+
+.project-links a {
+color: var(--primary);
+text-decoration: none;
+font-weight: 500;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+transition: var(--transition-fast);
+}
+
+.project-links a:hover {
+color: var(--accent);
+transform: translateX(3px);
+}
+
+/* Experience Section */
+#experience {
+background: var(--surface);
+}
+
+.timeline {
+position: relative;
+max-width: 900px;
+margin: 0 auto;
+padding-left: 40px;
+}
+
+.timeline::before {
+content: '';
+position: absolute;
+top: 0;
+bottom: 0;
+left: 4px;
+width: 4px;
+background: var(--primary);
+border-radius: 10px;
+}
+
+.timeline-item {
+position: relative;
+margin-bottom: 3.5rem;
+padding-left: 40px;
+}
+
+.timeline-item:last-child {
+margin-bottom: 0;
+}
+
+.timeline-content {
+background: var(--background);
+border-radius: var(--border-radius-lg);
+padding: 2rem;
+box-shadow: var(--shadow);
+transition: var(--transition);
+border: 1px solid var(--border);
+}
+
+.timeline-content:hover {
+transform: translateX(5px);
+box-shadow: var(--shadow-hover);
+}
+
+.timeline-header {
+display: flex;
+align-items: center;
+gap: 1.5rem;
+margin-bottom: 1.5rem;
+}
+
+.timeline-header img {
+width: 60px;
+height: 60px;
+border-radius: 16px;
+object-fit: contain;
+background: var(--surface);
+padding: 8px;
+}
+
+.timeline-header h3 {
+font-family: 'Poppins', sans-serif;
+font-size: 1.75rem;
+margin-bottom: 0.25rem;
+}
+
+.timeline-header p {
+color: var(--text-secondary);
+font-weight: 500;
+}
+
+.timeline-details {
+margin-top: 1.5rem;
+padding-top: 1.5rem;
+border-top: 1px solid var(--border);
+line-height: 1.8;
+}
+
+.timeline-details li {
+margin-bottom: 0.75rem;
+padding-left: 1.5rem;
+position: relative;
+}
+
+.timeline-details li::before {
+content: '•';
+position: absolute;
+left: 0;
+color: var(--primary);
+font-size: 1.25rem;
+}
+
+.toggle-details {
+background: var(--surface);
+border: 1px solid var(--border);
+color: var(--text);
+padding: 0.65rem 1.5rem;
+border-radius: 50px;
+margin-top: 1rem;
+cursor: pointer;
+transition: var(--transition-fast);
+font-weight: 500;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+width: fit-content;
+}
+
+.toggle-details:hover {
+background: var(--primary);
+color: white;
+border-color: var(--primary);
+}
+
+.toggle-details i {
+transition: transform 0.3s ease;
+}
+
+.expanded i {
+transform: rotate(180deg);
+}
+
+/* Contact Section */
+.contact-content {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 4rem;
+align-items: start;
+}
+
+.form-group {
+margin-bottom: 1.75rem;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 0.75rem;
+font-weight: 500;
+font-size: 1.05rem;
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 1rem 1.25rem;
+border: 1px solid var(--border);
+border-radius: 14px;
+background: var(--surface);
+color: var(--text);
+font-family: 'Inter', sans-serif;
+font-size: 1.05rem;
+transition: var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: var(--primary);
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-group textarea {
+min-height: 150px;
+resize: vertical;
+}
+
+.contact-info p {
+display: flex;
+align-items: flex-start;
+gap: 1rem;
+margin-bottom: 1.75rem;
+font-size: 1.1rem;
+line-height: 1.7;
+}
+
+.contact-info i {
+color: var(--primary);
+font-size: 1.35rem;
+margin-top: 4px;
+}
+
+.social-links {
+display: flex;
+gap: 1.5rem;
+margin-top: 1.5rem;
+}
+
+.social-links a {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 56px;
+height: 56px;
+border-radius: 16px;
+background: var(--surface);
+color: var(--text);
+font-size: 1.5rem;
+text-decoration: none;
+transition: var(--transition);
+border: 1px solid var(--border);
+}
+
+.social-links a:hover {
+transform: translateY(-3px);
+background: var(--primary);
+color: white;
+box-shadow: var(--shadow-hover);
+}
+
+/* Footer */
+footer {
+background: var(--secondary);
+color: rgba(255, 255, 255, 0.85);
+text-align: center;
+padding: 2.5rem 10%;
+margin-top: 2rem;
+}
+
+footer p {
+font-size: 1.05rem;
+line-height: 1.7;
+}
+
+/* Back to Top Button */
+#back-to-top {
+position: fixed;
+bottom: 2.5rem;
+right: 2.5rem;
+width: 56px;
+height: 56px;
+border-radius: 50%;
+background: var(--primary);
+color: white;
+border: none;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem;
+cursor: pointer;
+box-shadow: var(--shadow);
+transition: var(--transition);
+z-index: 999;
+opacity: 0;
+visibility: hidden;
+}
+
+#back-to-top.show {
+opacity: 1;
+visibility: visible;
+}
+
+#back-to-top:hover {
+transform: translateY(-3px) scale(1.05);
+box-shadow: var(--shadow-hover);
+background: var(--primary-dark);
+}
+
+/* Project Modal */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.85);
+z-index: 2000;
+justify-content: center;
+align-items: center;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.modal.active {
+display: flex;
+opacity: 1;
+}
+
+.modal-content {
+background: var(--surface);
+border-radius: var(--border-radius-lg);
+width: 90%;
+max-width: 1000px;
+max-height: 90vh;
+overflow-y: auto;
+position: relative;
+transform: translateY(20px);
+opacity: 0;
+transition: all 0.4s ease-out;
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.modal.active .modal-content {
+transform: translateY(0);
+opacity: 1;
+}
+
+.close-modal {
+position: absolute;
+top: 1.5rem;
+right: 1.5rem;
+font-size: 2.5rem;
+color: var(--text-secondary);
+cursor: pointer;
+transition: var(--transition-fast);
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+}
+
+.close-modal:hover {
+color: var(--accent);
+background: var(--background);
+transform: rotate(90deg);
+}
+
+#modal-body {
+padding: 3rem;
+}
+
+#modal-body h3 {
+font-family: 'Poppins', sans-serif;
+font-size: 2.25rem;
+margin-bottom: 1.5rem;
+}
+
+#modal-body img {
+width: 100%;
+border-radius: var(--border-radius);
+margin: 1.5rem 0;
+box-shadow: var(--shadow-hover);
+}
+
+#modal-body p {
+margin-bottom: 1.5rem;
+line-height: 1.8;
+font-size: 1.1rem;
+}
+
+#modal-body ul {
+padding-left: 1.5rem;
+margin: 1.5rem 0;
+}
+
+#modal-body li {
+margin-bottom: 0.75rem;
+line-height: 1.7;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes rotate {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+}
+
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); }
+100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+:root {
+font-size: 15px;
+}
+
+section {
+padding: 5rem 7%;
+}
+
+h2 {
+font-size: 2.25rem;
+}
+
+.hero-content h1 {
+font-size: 3.25rem;
+}
+
+#typed-text {
+font-size: 2.5rem;
+}
+
+.about-content,
+.contact-content {
+grid-template-columns: 1fr;
+gap: 3rem;
+}
+
+.about-image {
+max-width: 450px;
+margin: 0 auto;
+}
+
+.projects-grid {
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.timeline {
+padding-left: 0;
+margin-top: 2rem;
+}
+
+.timeline::before {
+left: 50%;
+transform: translateX(-50%);
+}
+
+.timeline-item {
+padding-left: 0;
+padding-right: 0;
+width: 100%;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+margin-left: auto;
+margin-right: 0;
+max-width: calc(100% - 40px);
+}
+}
+
+@media (max-width: 768px) {
+:root {
+font-size: 14px;
+}
+
+header {
+padding: 1.25rem 5%;
+flex-direction: column;
+gap: 1.5rem;
+}
+
+nav ul {
+gap: 1.5rem;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.social-sidebar {
+left: 1.5rem;
+gap: 0.85rem;
+}
+
+.social-sidebar a {
+width: 42px;
+height: 42px;
+font-size: 1.1rem;
+}
+
+section {
+padding: 4.5rem 5%;
+}
+
+.hero-content h1 {
+font-size: 2.75rem;
+}
+
+#typed-text {
+font-size: 2.15rem;
+}
+
+.hero-buttons {
+flex-direction: column;
+align-items: center;
+}
+
+.btn {
+width: 100%;
+text-align: center;
+}
+
+.projects-filter {
+flex-direction: column;
+align-items: center;
+}
+
+.filter-btn {
+width: 100%;
+max-width: 300px;
+}
+
+.contact-info p {
+flex-direction: column;
+align-items: flex-start;
+gap: 0.5rem;
+}
+
+footer {
+padding: 2rem 5%;
+}
+
+#back-to-top {
+bottom: 1.75rem;
+right: 1.75rem;
+width: 48px;
+height: 48px;
+font-size: 1.25rem;
+}
+
+#modal-body {
+padding: 2rem;
+}
+}
+
+@media (max-width: 480px) {
+:root {
+font-size: 13px;
+}
+
+.logo-svg {
+width: 34px;
+height: 34px;
+}
+
+.logo-text {
+font-size: 1.35rem;
+}
+
+nav ul {
+gap: 1rem;
+}
+
+nav a {
+font-size: 0.95rem;
+padding: 0.4rem 0;
+}
+
+#dark-mode-toggle {
+width: 42px;
+height: 42px;
+}
+
+section {
+padding: 4rem 4%;
+}
+
+h2 {
+font-size: 2rem;
+}
+
+.section-title {
+font-size: 1.85rem;
+}
+
+.hero-content h1 {
+font-size: 2.4rem;
+}
+
+#typed-text {
+font-size: 1.9rem;
+min-height: 3rem;
+}
+
+.hero-content p {
+font-size: 1.15rem;
+}
+
+.about-image {
+max-width: 100%;
+}
+
+.projects-grid {
+grid-template-columns: 1fr;
+}
+
+.project-card img {
+height: 200px;
+}
+
+.timeline::before {
+left: 16px;
+}
+
+.timeline-item {
+padding-left: 36px;
+}
+
+.timeline-header img {
+width: 50px;
+height: 50px;
+}
+
+.timeline-header h3 {
+font-size: 1.5rem;
+}
+}
+</style>
+</head>
+<body>
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress"></div>
+
+<!-- Header -->
+<header>
+<div class="logo">
+<svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="3" stroke-dasharray="283" stroke-dashoffset="283">
+<animate attributeName="stroke-dashoffset" values="283;0" dur="2s" fill="freeze" />
+</circle>
+<path d="M30 50 L45 65 L70 35" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60">
+<animate attributeName="stroke-dashoffset" values="60;0" dur="1.5s" fill="freeze" begin="0.5s" />
+</path>
+</svg>
+<div class="logo-text">Jaarraa</div>
+</div>
+<nav>
+<ul>
+<li><a href="#hero" class="active">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+<button id="dark-mode-toggle">
+<i class="fas fa-sun"></i>
+<i class="fas fa-moon"></i>
+</button>
+</header>
+
+<!-- Social Sidebar -->
+<div class="social-sidebar">
+<a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+<a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+</div>
+
+<!-- Hero Section -->
+<section id="hero">
+<div class="hero-bg">
+<div class="gradient-layer"></div>
+<div class="gradient-layer"></div>
+</div>
+<div class="hero-content">
+<h1>Hi, I'm <span>Jaarraa</span></h1>
+<h2 id="typed-text">Creative Technologist</h2>
+<p>I build digital experiences that matter, blending beautiful design with robust engineering to solve real-world problems.</p>
+<div class="hero-buttons">
+<a href="#projects" class="btn">View My Work</a>
+<a href="#" class="btn btn-secondary">Download Resume</a>
+</div>
+</div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+<div class="about-content">
+<div class="about-image">
+<img src="https://placehold.co/600x600/1e293b/ffffff?text=SA" alt="Jaarraa - Creative Technologist">
+</div>
+<div class="about-text">
+<h2 class="section-title">About Me</h2>
+<p class="section-subtitle">I'm a passionate creative technologist with 6+ years of experience building innovative digital products that users love and businesses value.</p>
+<p>My journey began with a computer science degree and a passion for design. I've since worked with startups and Fortune 500 companies to deliver award-winning digital experiences across web, mobile, and interactive installations.</p>
+<p>I believe technology should serve people, not the other way around. My approach combines user-centered design thinking with technical excellence to create solutions that are both beautiful and functional.</p>
+<p class="mission">"I strive to create digital experiences that not only solve problems but also evoke emotion and inspire action."</p>
+<div class="fun-facts">
+<span class="chip">🍕 Pizza Enthusiast</span>
+<span class="chip">🎧 Music Producer</span>
+<span class="chip">✈️ World Traveler</span>
+<span class="chip">🤖 AI Explorer</span>
+</div>
+<a href="#contact" class="btn">Let's Connect</a>
+</div>
+</div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills">
+<h2>My Skills</h2>
+<div class="skills-categories">
+<div class="category">
+<h3>Frontend</h3>
+<div class="skill-item">
+<div class="skill-info">
+<span>React & Next.js</span>
+<span>95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>TypeScript</span>
+<span>90%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 90%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>Tailwind CSS</span>
+<span>95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>Three.js & WebGL</span>
+<span>85%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 85%"></div>
+</div>
+</div>
+</div>
+
+<div class="category">
+<h3>Backend</h3>
+<div class="skill-item">
+<div class="skill-info">
+<span>Node.js</span>
+<span>85%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 85%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>Python & Django</span>
+<span>80%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 80%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>GraphQL</span>
+<span>90%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 90%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>Firebase</span>
+<span>85%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 85%"></div>
+</div>
+</div>
+</div>
+
+<div class="category">
+<h3>Design & Tools</h3>
+<div class="skill-item">
+<div class="skill-info">
+<span>Figma & Framer</span>
+<span>95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>UI/UX Design</span>
+<span>90%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 90%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>After Effects</span>
+<span>80%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 80%"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span>3D Modeling</span>
+<span>75%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 75%"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="tech-logos">
+<div class="logo-item" data-tooltip="95% Proficient">
+<i class="fab fa-react"></i>
+</div>
+<div class="logo-item" data-tooltip="90% Proficient">
+<i class="fab fa-js"></i>
+</div>
+<div class="logo-item" data-tooltip="85% Proficient">
+<i class="fab fa-node-js"></i>
+</div>
+<div class="logo-item" data-tooltip="90% Proficient">
+<i class="fab fa-python"></i>
+</div>
+<div class="logo-item" data-tooltip="95% Proficient">
+<i class="fab fa-figma"></i>
+</div>
+<div class="logo-item" data-tooltip="85% Proficient">
+<i class="fab fa-docker"></i>
+</div>
+</div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+<h2>Featured Projects</h2>
+<div class="projects-filter">
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="frontend">Frontend</button>
+<button class="filter-btn" data-filter="backend">Backend</button>
+<button class="filter-btn" data-filter="design">Design</button>
+</div>
+<div class="projects-grid">
+<!-- Project 1 -->
+<div class="project-card" data-category="frontend">
+<img src="https://placehold.co/600x400/1e293b/ffffff?text=Nexus+Finance" alt="Nexus Finance Dashboard">
+<div class="project-content">
+<h3>Nexus Finance Dashboard</h3>
+<p>A comprehensive financial dashboard with real-time data visualization and predictive analytics for enterprise clients.</p>
+<div class="project-tech">
+<span>React</span>
+<span>TypeScript</span>
+<span>D3.js</span>
+<span>Firebase</span>
+</div>
+<div class="project-links">
+<a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+<a href="#"><i class="fab fa-github"></i> GitHub</a>
+</div>
+</div>
+<div class="project-details" hidden>
+<h3>Nexus Finance Dashboard</h3>
+<img src="https://placehold.co/800x400/1e293b/ffffff?text=Nexus+Finance+Dashboard" alt="Nexus Finance Dashboard Interface">
+<p>This enterprise-grade financial dashboard was built for a Fortune 500 client to visualize complex financial data in real-time. The application processes over 10 million data points daily and provides predictive analytics using machine learning models.</p>
+<p>Key features include customizable widgets, real-time data streaming, advanced filtering, and export capabilities. The interface was designed with accessibility as a priority, achieving WCAG 2.1 AA compliance.</p>
+<ul>
+<li>Implemented real-time data visualization using D3.js and WebSockets</li>
+<li>Created a component library with 50+ reusable UI components</li>
+<li>Optimized performance to handle large datasets with virtual scrolling</li>
+<li>Integrated machine learning models for predictive analytics</li>
+<li>Designed a fully responsive interface that works on all device sizes</li>
+</ul>
+</div>
+</div>
+
+<!-- Project 2 -->
+<div class="project-card" data-category="design">
+<img src="https://placehold.co/600x400/1e293b/ffffff?text=EcoTrack" alt="EcoTrack Mobile App">
+<div class="project-content">
+<h3>EcoTrack Mobile App</h3>
+<p>A sustainability tracking application that helps users monitor and reduce their carbon footprint through actionable insights.</p>
+<div class="project-tech">
+<span>Figma</span>
+<span>React Native</span>
+<span>Firebase</span>
+<span>Node.js</span>
+</div>
+<div class="project-links">
+<a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+<a href="#"><i class="fab fa-github"></i> GitHub</a>
+</div>
+</div>
+<div class="project-details" hidden>
+<h3>EcoTrack Mobile App</h3>
+<img src="https://placehold.co/800x400/1e293b/ffffff?text=EcoTrack+Mobile+App" alt="EcoTrack Mobile Interface">
+<p>EcoTrack is a mobile application designed to help environmentally conscious users track and reduce their carbon footprint. The app connects to various services to automatically calculate emissions from transportation, energy usage, diet, and shopping habits.</p>
+<p>The design focuses on making sustainability accessible and engaging through gamification elements, personalized recommendations, and community challenges. The app has been featured in TechCrunch and won the 2025 Green Tech Award.</p>
+<ul>
+<li>Designed a complete user journey from onboarding to habit formation</li>
+<li>Created interactive data visualizations to make carbon data understandable</li>
+<li>Implemented a points and rewards system to encourage sustainable actions</li>
+<li>Built a community feature for sharing tips and challenges</li>
+<li>Integrated with third-party APIs for automatic data collection</li>
+</ul>
+</div>
+</div>
+
+<!-- Project 3 -->
+<div class="project-card" data-category="backend">
+<img src="https://placehold.co/600x400/1e293b/ffffff?text=MediConnect" alt="MediConnect API Platform">
+<div class="project-content">
+<h3>MediConnect API Platform</h3>
+<p>A secure healthcare API platform that connects hospitals, clinics, and patients while ensuring HIPAA compliance and data security.</p>
+<div class="project-tech">
+<span>Node.js</span>
+<span>Python</span>
+<span>MongoDB</span>
+<span>AWS</span>
+</div>
+<div class="project-links">
+<a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+<a href="#"><i class="fab fa-github"></i> GitHub</a>
+</div>
+</div>
+<div class="project-details" hidden>
+<h3>MediConnect API Platform</h3>
+<img src="https://placehold.co/800x400/1e293b/ffffff?text=MediConnect+API+Platform" alt="MediConnect Architecture">
+<p>MediConnect is a secure API platform designed for the healthcare industry to facilitate seamless data exchange between hospitals, clinics, laboratories, and patients. The platform handles sensitive medical data with strict HIPAA compliance and enterprise-grade security measures.</p>
+<p>The system processes over 500,000 API requests daily and supports FHIR (Fast Healthcare Interoperability Resources) standards. It includes features for patient consent management, audit logging, and real-time notifications for critical health events.</p>
+<ul>
+<li>Designed and implemented a microservices architecture using Node.js and Python</li>
+<li>Implemented end-to-end encryption and strict access controls for PHI data</li>
+<li>Created a developer portal with comprehensive documentation and SDKs</li>
+<li>Built a real-time notification system using WebSockets and server-sent events</li>
+<li>Designed a scalable infrastructure on AWS with auto-scaling capabilities</li>
+</ul>
+</div>
+</div>
+
+<!-- Project 4 -->
+<div class="project-card" data-category="frontend">
+<img src="https://placehold.co/600x400/1e293b/ffffff?text=Artisan" alt="Artisan E-commerce Platform">
+<div class="project-content">
+<h3>Artisan E-commerce Platform</h3>
+<p>A premium e-commerce platform for independent artisans featuring immersive product showcases and seamless checkout experience.</p>
+<div class="project-tech">
+<span>Next.js</span>
+<span>Stripe</span>
+<span>Three.js</span>
+<span>Tailwind CSS</span>
+</div>
+<div class="project-links">
+<a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+<a href="#"><i class="fab fa-github"></i> GitHub</a>
+</div>
+</div>
+<div class="project-details" hidden>
+<h3>Artisan E-commerce Platform</h3>
+<img src="https://placehold.co/800x400/1e293b/ffffff?text=Artisan+E-commerce" alt="Artisan Product Showcase">
+<p>Artisan is a premium e-commerce platform designed specifically for independent artists and craftspeople to showcase and sell their work. The platform features immersive 3D product previews, storytelling capabilities, and a seamless checkout experience.</p>
+<p>The design focuses on highlighting the craftsmanship and story behind each product while providing a frictionless purchasing journey. The platform has helped over 500 artisans increase their sales by an average of 140% within the first six months.</p>
+<ul>
+<li>Implemented 3D product previews using Three.js and GLTF models</li>
+<li>Created a custom CMS for artisans to manage their stores and stories</li>
+<li>Designed an accessible checkout flow with multiple payment options</li>
+<li>Optimized performance with Next.js ISR and image optimization</li>
+<li>Built a recommendation engine based on user preferences and behavior</li>
+</ul>
+</div>
+</div>
+
+<!-- Project 5 -->
+<div class="project-card" data-category="design">
+<img src="https://placehold.co/600x400/1e293b/ffffff?text=Voyage" alt="Voyage Travel App">
+<div class="project-content">
+<h3>Voyage Travel App</h3>
+<p>A travel planning application that uses AI to create personalized itineraries and connects travelers with local experiences.</p>
+<div class="project-tech">
+<span>Figma</span>
+<span>React Native</span>
+<span>TensorFlow.js</span>
+<span>Firebase</span>
+</div>
+<div class="project-links">
+<a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+<a href="#"><i class="fab fa-github"></i> GitHub</a>
+</div>
+</div>
+<div class="project-details" hidden>
+<h3>Voyage Travel App</h3>
+<img src="https://placehold.co/800x400/1e293b/ffffff?text=Voyage+Travel+App" alt="Voyage App Interface">
+<p>Voyage is an AI-powered travel planning application that creates personalized itineraries based on user preferences, budget, and travel style. The app connects travelers with local experiences and hidden gems that aren't typically found in guidebooks.</p>
+<p>The design focuses on inspiration and discovery, with beautiful imagery, intuitive planning tools, and seamless booking integration. The AI engine learns from user feedback to continuously improve recommendations.</p>
+<ul>
+<li>Designed an intuitive trip planning interface with drag-and-drop functionality</li>
+<li>Created a recommendation system using collaborative filtering algorithms</li>
+<li>Implemented offline functionality for travel in areas with limited connectivity</li>
+<li>Designed a social feature for sharing trips and getting recommendations</li>
+<li>Built a content management system for local experience providers</li>
+</ul>
+</div>
+</div>
+
+<!-- Project 6 -->
+<div class="project-card" data-category="backend">
+<img src="https://placehold.co/600x400/1e293b/ffffff?text=DataFlow" alt="DataFlow Analytics Engine">
+<div class="project-content">
+<h3>DataFlow Analytics Engine</h3>
+<p>A real-time data processing engine that handles billions of events daily for enterprise clients with sub-second latency requirements.</p>
+<div class="project-tech">
+<span>Python</span>
+<span>Kafka</span>
+<span>Docker</span>
+<span>Kubernetes</span>
+</div>
+<div class="project-links">
+<a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+<a href="#"><i class="fab fa-github"></i> GitHub</a>
+</div>
+</div>
+<div class="project-details" hidden>
+<h3>DataFlow Analytics Engine</h3>
+<img src="https://placehold.co/800x400/1e293b/ffffff?text=DataFlow+Analytics" alt="DataFlow Architecture">
+<p>DataFlow is a high-performance analytics engine designed to process billions of events daily with sub-second latency. The system powers real-time dashboards, anomaly detection, and automated decision-making for enterprise clients in finance, e-commerce, and IoT.</p>
+<p>The architecture is built for extreme scalability and fault tolerance, with automatic scaling based on load and comprehensive monitoring. The engine processes data from multiple sources including web events, IoT devices, and transaction systems.</p>
+<ul>
+<li>Designed a distributed streaming architecture using Apache Kafka and Flink</li>
+<li>Implemented complex event processing with windowing and state management</li>
+<li>Created a query engine supporting SQL-like syntax for business users</li>
+<li>Built a monitoring dashboard with real-time metrics and alerting</li>
+<li>Designed a deployment pipeline with zero-downtime updates</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience">
+<h2>Experience & Education</h2>
+<div class="timeline">
+<!-- Experience 1 -->
+<div class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-header">
+<img src="https://placehold.co/100x100/1e293b/ffffff?text=TC" alt="TechCorp Logo">
+<div>
+<h3>Lead Frontend Engineer</h3>
+<p>TechCorp Inc. | Jan 2021 - Present</p>
+</div>
+</div>
+<ul class="timeline-details">
+<li>Lead a team of 8 engineers building enterprise SaaS products used by Fortune 500 companies</li>
+<li>Architected and implemented a design system used across 15+ products with 95% component reuse</li>
+<li>Reduced bundle size by 40% through code splitting and lazy loading strategies</li>
+<li>Mentored junior engineers and established best practices for accessibility and performance</li>
+</ul>
+<button class="toggle-details">
+<span>Show Details</span>
+<i class="fas fa-chevron-down"></i>
+</button>
+</div>
+</div>
+
+<!-- Experience 2 -->
+<div class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-header">
+<img src="https://placehold.co/100x100/1e293b/ffffff?text=DS" alt="DesignStudio Logo">
+<div>
+<h3>Senior UI/UX Developer</h3>
+<p>DesignStudio | Mar 2018 - Dec 2020</p>
+</div>
+</div>
+<ul class="timeline-details" hidden>
+<li>Collaborated with designers to implement pixel-perfect, responsive interfaces for clients including Nike, Apple, and Google</li>
+<li>Built interactive prototypes using Framer and React for user testing and stakeholder presentations</li>
+<li>Developed a component library that reduced development time by 30% across projects</li>
+<li>Implemented complex animations and micro-interactions to enhance user engagement</li>
+</ul>
+<button class="toggle-details">
+<span>Show Details</span>
+<i class="fas fa-chevron-down"></i>
+</button>
+</div>
+</div>
+
+<!-- Education 1 -->
+<div class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-header">
+<img src="https://placehold.co/100x100/1e293b/ffffff?text=ST" alt="Stanford Logo">
+<div>
+<h3>M.S. Computer Science</h3>
+<p>Stanford University | 2016 - 2018</p>
+</div>
+</div>
+<ul class="timeline-details" hidden>
+<li>Specialized in Human-Computer Interaction and Machine Learning</li>
+<li>Thesis: "Adaptive Interfaces for Accessibility in Mobile Applications"</li>
+<li>Teaching assistant for Advanced Web Development course</li>
+<li>Recipient of the Dean's Fellowship for academic excellence</li>
+</ul>
+<button class="toggle-details">
+<span>Show Details</span>
+<i class="fas fa-chevron-down"></i>
+</button>
+</div>
+</div>
+
+<!-- Experience 3 -->
+<div class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-header">
+<img src="https://placehold.co/100x100/1e293b/ffffff?text=SB" alt="StartupBoost Logo">
+<div>
+<h3>Full Stack Developer</h3>
+<p>StartupBoost | Jun 2016 - Feb 2018</p>
+</div>
+</div>
+<ul class="timeline-details" hidden>
+<li>Developed MVPs for 12+ startups in fintech, healthtech, and edtech sectors</li>
+<li>Built full-stack applications using React, Node.js, and MongoDB</li>
+<li>Implemented CI/CD pipelines that reduced deployment time by 75%</li>
+<li>Conducted user research and usability testing to inform product decisions</li>
+</ul>
+<button class="toggle-details">
+<span>Show Details</span>
+<i class="fas fa-chevron-down"></i>
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+<h2>Get In Touch</h2>
+<div class="contact-content">
+<form id="contact-form" action="https://formspree.io/f/{form_id}" method="POST">
+<div class="form-group">
+<label for="name">Name</label>
+<input type="text" id="name" name="name" required>
+</div>
+<div class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" name="email" required>
+</div>
+<div class="form-group">
+<label for="subject">Subject</label>
+<input type="text" id="subject" name="subject" required>
+</div>
+<div class="form-group">
+<label for="message">Message</label>
+<textarea id="message" name="message" required></textarea>
+</div>
+<button type="submit" class="btn">Send Message</button>
+</form>
+<div class="contact-info">
+<p>
+<i class="fas fa-envelope"></i>
+<span>jaarraa24434@gmail.com</span>
+</p>
+<p>
+<i class="fas fa-phone"></i>
+<span>+251939900545</span>
+</p>
+<div class="social-links">
+<a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+<a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<p>© 2026 jaarraa. All rights reserved. Designed and developed
+</footer>
+
+<!-- Back to Top Button -->
+<button id="back-to-top">
+<i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Project Modal -->
+<div id="project-modal" class="modal">
+<div class="modal-content">
+<span class="close-modal">×</span>
+<div id="modal-body"></div>
+</div>
+</div>
+
+<script>
+// Dark Mode Toggle
+const html = document.documentElement;
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+// Check system preference
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+if (prefersDarkScheme.matches) {
+html.classList.add('dark-mode');
+}
+
+darkModeToggle.addEventListener('click', () => {
+html.classList.toggle('dark-mode');
+});
+
+// Scroll Progress Indicator
+const scrollProgress = document.getElementById('scroll-progress');
+
+window.addEventListener('scroll', () => {
+const scrollTop = document.documentElement.scrollTop;
+const scrollHeight = document.documentElement.scrollHeight;
+const clientHeight = document.documentElement.clientHeight;
+const scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100;
+scrollProgress.style.width = scrolled + '%';
+});
+
+// Navigation Active Links
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a');
+
+window.addEventListener('scroll', () => {
+let current = '';
+
+sections.forEach(section => {
+const sectionTop = section.offsetTop - 100;
+if (pageYOffset >= sectionTop) {
+current = section.getAttribute('id');
+}
+});
+
+navLinks.forEach(link => {
+link.classList.remove('active');
+if (link.getAttribute('href').slice(1) === current) {
+link.classList.add('active');
+}
+});
+
+// Header scroll effect
+const header = document.querySelector('header');
+if (window.pageYOffset > 100) {
+header.classList.add('scrolled');
+} else {
+header.classList.remove('scrolled');
+}
+});
+
+// Back to Top Button
+const backToTopButton = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+if (window.pageYOffset > 300) {
+backToTopButton.classList.add('show');
+} else {
+backToTopButton.classList.remove('show');
+}
+});
+
+backToTopButton.addEventListener('click', () => {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+
+// Typewriter Effect
+const typedTextElement = document.getElementById('typed-text');
+const roles = ['Creative Technologist', 'UI/UX Developer', 'Full Stack Engineer', 'Digital Product Designer'];
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let isPaused = false;
+
+function type() {
+const currentRole = roles[roleIndex];
+
+if (isDeleting) {
+typedTextElement.textContent = currentRole.substring(0, charIndex - 1);
+charIndex--;
+} else {
+typedTextElement.textContent = currentRole.substring(0, charIndex + 1);
+charIndex++;
+}
+
+let typeSpeed = 100;
+
+if (isDeleting) {
+typeSpeed = 50;
+}
+
+if (!isDeleting && charIndex === currentRole.length) {
+isPaused = true;
+setTimeout(() => {
+isPaused = false;
+isDeleting = true;
+}, 1500);
+} else if (isDeleting && charIndex === 0) {
+isDeleting = false;
+roleIndex = (roleIndex + 1) % roles.length;
+}
+
+if (!isPaused) {
+setTimeout(type, typeSpeed);
+}
+}
+
+setTimeout(type, 500);
+
+// Project Modal
+const projectCards = document.querySelectorAll('.project-card');
+const modal = document.getElementById('project-modal');
+const modalBody = document.getElementById('modal-body');
+const closeModal = document.querySelector('.close-modal');
+
+projectCards.forEach(card => {
+card.addEventListener('click', () => {
+const details = card.querySelector('.project-details').innerHTML;
+modalBody.innerHTML = details;
+modal.classList.add('active');
+document.body.style.overflow = 'hidden';
+});
+});
+
+closeModal.addEventListener('click', () => {
+modal.classList.remove('active');
+document.body.style.overflow = 'auto';
+});
+
+modal.addEventListener('click', (e) => {
+if (e.target === modal) {
+modal.classList.remove('active');
+document.body.style.overflow = 'auto';
+}
+});
+
+// Project Filtering
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectCardsAll = document.querySelectorAll('.project-card');
+
+filterButtons.forEach(button => {
+button.addEventListener('click', () => {
+// Update active button
+filterButtons.forEach(btn => btn.classList.remove('active'));
+button.classList.add('active');
+
+const filter = button.getAttribute('data-filter');
+
+projectCardsAll.forEach(card => {
+if (filter === 'all' || card.getAttribute('data-category') === filter) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+
+// Timeline Toggle Details
+const toggleButtons = document.querySelectorAll('.toggle-details');
+
+toggleButtons.forEach(button => {
+button.addEventListener('click', () => {
+const details = button.previousElementSibling;
+details.hidden = !details.hidden;
+button.classList.toggle('expanded');
+button.querySelector('span').textContent = details.hidden ? 'Show Details' : 'Hide Details';
+});
+});
+
+// Smooth Scrolling for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+
+// Close mobile menu if open
+const navbar = document.getElementById('navbar');
+if (navbar && navbar.classList.contains('active')) {
+navbar.classList.remove('active');
+}
+}
+});
+});
+
+// Form Submission Handling
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+contactForm.addEventListener('submit', (e) => {
+e.preventDefault();
+
+// In a real implementation, you would submit to Formspree here
+// For demo purposes, we'll show an alert
+alert('Thank you for your message! This is a demo form. In a real implementation, this would be sent via Formspree.');
+contactForm.reset();
+});
+}
+
+// Initialize skill bars animation on scroll
+const skillBars = document.querySelectorAll('.skill-progress');
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const width = entry.target.style.width;
+entry.target.style.width = '0';
+setTimeout(() => {
+entry.target.style.width = width;
+}, 100);
+}
+});
+}, { threshold: 0.5 });
+
+skillBars.forEach(bar => {
+observer.observe(bar);
+});
+</script>
+</body>
+</html>
